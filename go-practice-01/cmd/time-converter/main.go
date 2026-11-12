@@ -17,11 +17,11 @@ func main() {
 	}
 
 	const min_in_hour = 60
-	
+
 	hours := totalMinutes / min_in_hour
 	min_ost := totalMinutes % min_in_hour
-	
-	fmt.Printf("Колличество минут: %d\n", totalMinutes )
-	fmt.Printf("Полных часов: %d\n", hours )
+
+	fmt.Printf("Колличество минут: %d\n", totalMinutes)
+	fmt.Printf("Полных часов: %d\n", hours)
 	fmt.Printf("Оставшихся минут: %d\n", min_ost)
 }

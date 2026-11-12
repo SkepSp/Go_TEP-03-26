@@ -8,7 +8,6 @@ func main() {
 	completed := 1
 	var group = "КЕФТЕМЕ-02-67"
 	var ready = true
-	
 
 	fmt.Printf("Участник: %s\n", name)
 	fmt.Printf("Группа: %s\n", group)
