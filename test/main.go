@@ -1,46 +1,44 @@
 package main
-import "fmt"
- 
-// интерфейс перемещения объекта
-type Movable interface{
-    move()
-} 
- 
-type Rectangle struct{ 
-    x,          // X-координата левого верхнего угла 
-    y,          // Y-координата левого верхнего угла 
-    width,      // ширина 
-    height int  // высота
-}
- 
-type Circle struct{ 
-    x,           // X-координата центра круга 
-    y,           // Y-координата центра круга 
-    radius int  // радиус круга
-}
- 
-// реализация интерфейса Movable для Rectangle
-func (r Rectangle) move(){
-    fmt.Println("Перемещаем прямоугольник")
+
+import (
+	"bytes"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"os"
+)
+type task struct{
+Data string
 }
 
-func (r Rectangle) test(){
+// TODO: if path is absent, return an empty state with NextID=1.
+// If the file exists, decode exactly one JSON document, validate it via Restore,
+// and return a meaningful error for corrupted data. Do NOT silently reset it.
+func Load(path string) (task, error) {
 
+	data, err := os.ReadFile(path) 
+	if errors.Is(err, os.ErrNotExist){
+		return task{Data: "0"}, nil
+	}
+
+	decJson := json.NewDecoder(bytes.NewReader(data))
+	decJson.DisallowUnknownFields()
+	
+	var s task
+	if err := decJson.Decode(&s); err != nil {
+    	fmt.Print(err)
+	}
+
+	return task{Data: "123"}, nil
 }
- 
-// реализация интерфейса Movable для Circle
-func (c Circle) move(){
-    fmt.Println("Перемещаем круг")
+
+func main(){
+	Load("fl.json")
 }
- 
-func main() {
-     
-    var shape Movable = Rectangle{ x: 20, y: 10, width: 150, height: 100} 
-    
-    //move_object(shape)
- 
-    // проверяем, реализует ли структура Rectangle интерфейс Movable 
-    value, ok := shape.(Rectangle) 
-    fmt.Println(ok)  // true
-    fmt.Println(value)  // {20 10 150 100}
-}
+
+// TODO: validate the state, marshal it using encoding/json, save to a
+// temporary file in the same directory and replace the target using os.Rename.
+// Do not remove the old file before a successful temporary write.
+// func Save(path string, state tasks.State) error {
+// 	return nil
+// }
