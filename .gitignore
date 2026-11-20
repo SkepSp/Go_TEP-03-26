@@ -25,10 +25,13 @@ profile.cov
 # Go workspace file
 go.work
 go.work.sum
-.test/
+
+
+test/
+
 # env file
 .env
-.json
+*.json
 
 # Editor/IDE
 # .idea/
