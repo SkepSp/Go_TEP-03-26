@@ -7,4 +7,5 @@
 - [3 практика](go-03-structs-methods-pointers/)
 - [4 практика](04-interfaces-errors/)
 - [5 практика](05-project-git-json/)
+- [6 практика](06-postgresql-sql/)
 
